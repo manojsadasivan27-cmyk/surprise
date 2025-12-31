@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year Balloons</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(to top, #020024, #090979, #00d4ff);
+    font-family: Arial, sans-serif;
+    color: white;
+  }
+
+  h1 {
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    text-align: center;
+    font-size: 4rem;
+    text-shadow: 0 0 15px gold;
+    z-index: 10;
+  }
+
+  .balloon {
+    position: absolute;
+    bottom: -150px;
+    width: 70px;
+    height: 90px;
+    border-radius: 50%;
+    animation: rise linear infinite;
+  }
+
+  .balloon::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 10px solid currentColor;
+  }
+
+  .string {
+    position: absolute;
+    top: 90px;
+    left: 50%;
+    width: 2px;
+    height: 80px;
+    background: white;
+    transform: translateX(-50%);
+  }
+
+  @keyframes rise {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-120vh);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<h1>🎉 Happy New Year 🎉</h1>
+
+<script>
+  const colors = ["red", "gold", "lime", "cyan", "magenta", "orange"];
+
+  function createBalloon() {
+    const balloon = document.createElement("div");
+    balloon.className = "balloon";
+
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    balloon.style.background = color;
+    balloon.style.color = color;
+    balloon.style.left = Math.random() * 100 + "vw";
+    balloon.style.animationDuration = (5 + Math.random() * 5) + "s";
+
+    const string = document.createElement("div");
+    string.className = "string";
+    balloon.appendChild(string);
+
+    document.body.appendChild(balloon);
+
+    setTimeout(() => {
+      balloon.remove();
+    }, 10000);
+  }
+
+  setInterval(createBalloon, 600);
+</script>
+
+</body>
+</html>
